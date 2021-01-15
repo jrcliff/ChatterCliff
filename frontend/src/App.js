@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import LoginForm from './components/LoginForm'
 import RegistrationForm from './components/RegistrationForm'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Home from './components/Home'
 
 
 function App() {
@@ -59,6 +60,9 @@ function App() {
       </Route>
       <Route path='/signup'>
         <RegistrationForm SignUp={SignUp} />
+      </Route>
+      <Route path='/home'>
+        <Home />
       </Route>
       </Router>
     </div>

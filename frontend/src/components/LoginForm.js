@@ -3,7 +3,7 @@ import { FormGroup } from '@material-ui/core';
 import { FormLabel } from '@material-ui/core';
 import { Input } from '@material-ui/core';
 import RegistrationForm from './RegistrationForm';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 
 export default function LoginForm({ Login, error }) {
@@ -17,6 +17,8 @@ export default function LoginForm({ Login, error }) {
     const submitHandler = e => {
         e.preventDefault();
         Login(details);
+        localStorage.setItem('currentUser', details)
+        return <Redirect to='/home' />
     }
     return (
         <form onSubmit={submitHandler}>

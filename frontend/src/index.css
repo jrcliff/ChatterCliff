@@ -1,8 +1,13 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: montesserat, sans-serif;
+  font-family: Roboto, sans-serif;
+  text-shadow: 10px 4px 10px rgba(0, 0, 0, 0.25);
+  font-style: normal;
+  font-weight: 500;
+  
 }
 
 input, button {
@@ -93,4 +98,34 @@ form .form-inner input[type='submit']:hover {
 
 form .form-inner .form-group input {
   background-color: linear-gradient(to right, gray 50%, white 50%, black);
+}
+
+
+
+#chat-container {
+  /* min-width: 800px; */
+  /* max-width: 1000px; */
+  /* max-height: 800px; */
+  height: 100%;
+  background: #FFF;
+  border-radius: 10px;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+#side-bar {
+  background: #0048AA;
+  border-radius: 10px 0 0 10px;
+  width: 280px;
+  height: 100%;
+
+}
+#chat-window {
+  
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
 }
