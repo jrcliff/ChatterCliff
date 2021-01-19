@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import LoginForm from './components/LoginForm'
 import RegistrationForm from './components/RegistrationForm'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -6,12 +6,27 @@ import Home from './components/Home'
 
 
 function App() {
+  const roomsUrl = 'http://localhost:3000/chat_rooms'
   const adminUser = {
     email: 'admin@admin.com',
     password: 'password'
   }
 
+  const [rooms, setRooms] = useState([])
+
+  useEffect(() => {
+    fetch(roomsUrl).then(
+      res => res.json()
+      ).then(roomArr => localStorage.setItem('rooms', JSON.stringify(roomArr))
+      )
+  })
+
   const [user, setUser] = useState({username: '', email: '', password: ''});
+
+  useEffect(() => {
+    
+  })
+
   const [error, setError] = useState('');
 
   const Login = details => {

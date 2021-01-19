@@ -24,6 +24,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def login
+    @user = User.find_by(username: params[:username])
+    render json: @user, include: [:chat_rooms => {:include => :messages}]
+  end
+
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
