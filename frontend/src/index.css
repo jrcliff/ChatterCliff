@@ -10,12 +10,12 @@
   
 }
 
-input, button {
+/* input, button {
   appearance: none;
   background: none;
   border: none;
   outline: none;
-}
+} */
 
 .App {
   height:100vh;
@@ -30,7 +30,7 @@ form {
   position: relative;
 }
 
-form:after {
+/* form:after {
   content: '';
   display: block;
   position: absolute;
@@ -40,7 +40,9 @@ form:after {
   bottom: -5px;
   z-index: 1;
   background-image: linear-gradient(to bottom right, #2F4858, #3590F3);
-}
+} */
+
+
 
 form .form-inner {
   position: relative;
@@ -96,9 +98,9 @@ form .form-inner input[type='submit']:hover {
   background-position: 100% 0%;
 } 
 
-form .form-inner .form-group input {
+/* form .form-inner .form-group input {
   background-color: linear-gradient(to right, gray 50%, white 50%, black);
-}
+} */
 
 
 

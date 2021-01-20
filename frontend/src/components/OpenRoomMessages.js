@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function OpenRoom(props) {
+export default function OpenRoomMessages(props) {
     return (
         <div>
             
