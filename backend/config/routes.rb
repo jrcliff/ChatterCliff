@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :chat_rooms
   resources :users
 
-  GET '/login', to: 'users#login'
+  get '/login', to: 'users#login'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

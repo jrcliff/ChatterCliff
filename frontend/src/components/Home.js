@@ -3,7 +3,7 @@ import ChatRooms from './ChatRooms'
 import Messages from './Messages'
 
 
-export default function Home() {
+export default function Home(props) {
 
     const [openRoom, setOpenRoom] = useState(null);
 
@@ -23,10 +23,16 @@ export default function Home() {
     return (
         <div id='chat-container'>
             <div id="side-bar">
+            <div>
+                
+                <h2>
+                    {props.currentUser?.username}
+                </h2>
+            </div>
             <ChatRooms handleOpenRoom={handleOpenRoom} />
             </div>
             <div id="chat-window">
-            <Messages openRoom={openRoom} />
+            <Messages setOpenRoom={setOpenRoom} openRoom={openRoom} />
             {/* { messages.map(message => <Message message={message} key={message.id} />)} */}
             
             </div>

@@ -6,7 +6,7 @@ import RegistrationForm from './RegistrationForm';
 import { Link, Redirect } from 'react-router-dom'
 
 
-export default function LoginForm({ Login, error }) {
+export default function LoginForm({ Login, error, props }) {
     const [details, setDetails] = useState({
         username: '', 
         email: '', 
@@ -26,10 +26,10 @@ export default function LoginForm({ Login, error }) {
         fetch('http://localhost:3000/login', reqObj)
         .then(res => res.json())
         .then(user => localStorage.setItem('current_user', user))
-        console.log(details.current_user)
-        
-        
+        .then(user => console.log(user))
     }
+
+    // console.log(props.currentUser)
     return (
         localStorage.getItem('current_user') ? <Redirect to='/home' /> :
         <form onSubmit={submitHandler}>
@@ -56,3 +56,4 @@ export default function LoginForm({ Login, error }) {
        
     )
 }
+
