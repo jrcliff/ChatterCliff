@@ -26,13 +26,14 @@ export default function ChatRooms(props) {
 
 
 
+
     
     return (
         
         
         <div>
         <NewRoom updateNewRooms={updateNewRooms} />
-        {rooms?.map(room => <Room handleDelete={handleDelete} handleOpenRoom={props.handleOpenRoom} key={room.id} room={room} />)}
+        {rooms?.map(room => <Room handleDelete={handleDelete}  handleOpenRoom={props.handleOpenRoom} key={room.id} room={room} />)}
         </div>
     )
 }

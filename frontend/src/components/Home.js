@@ -11,6 +11,7 @@ export default function Home(props) {
     const handleOpenRoom = (room) => {
         if(room !== undefined){
             setOpenRoom(room)
+            setRoomMessages(room.messages)
         }
         // const [messages, setMessages] = useState({
         //     messages: room.messages
@@ -18,6 +19,14 @@ export default function Home(props) {
 
         console.log(room.messages)
     }
+
+    const [roomMessages, setRoomMessages] = useState(openRoom?.messages)
+    // if (message.user === current_user)
+    const updateMessages = (newMessage) => {
+        setRoomMessages([...roomMessages, newMessage])
+         console.log(roomMessages);
+    }
+
     console.log(openRoom);
 
 
@@ -34,7 +43,7 @@ export default function Home(props) {
             <ChatRooms handleOpenRoom={handleOpenRoom} />
             </div>
             <div id="chat-window">
-            <Messages setOpenRoom={setOpenRoom} openRoom={openRoom} />
+            <Messages roomMessages={roomMessages} setOpenRoom={setOpenRoom} updateMessages={updateMessages} openRoom={openRoom} />
             {/* { messages.map(message => <Message message={message} key={message.id} />)} */}
             
             </div>

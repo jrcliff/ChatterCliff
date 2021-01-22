@@ -25,8 +25,9 @@ export default function LoginForm({ Login, error, props }) {
         };
         fetch('http://localhost:3000/login', reqObj)
         .then(res => res.json())
-        .then(user => localStorage.setItem('current_user', user))
-        .then(user => console.log(user))
+        .then(user => localStorage.setItem('currentUser', user))
+        .then(user => () => props.Login(user))
+        
     }
 
     // console.log(props.currentUser)

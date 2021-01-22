@@ -21,7 +21,7 @@ function App() {
       )
   })
 
-  const [user, setUser] = useState({username: '', email: '', password: ''});
+  const [user, setUser] = useState(localStorage.getItem('currentUser') || {})
 
   useEffect(() => {
     
@@ -30,17 +30,9 @@ function App() {
   const [error, setError] = useState('');
 
   const Login = details => {
-    if (details.email == adminUser.email && details.password == adminUser.password) {
-      console.log('logged in');
-      setUser({
-        username: details.username,
-        email: details.email,
-        password: details.password
-      });
-    } else {
-      console.log('Details do not match!');
-      setError('Details do not match!');
-    }
+    
+    setUser(details);
+  
     console.log(details);
     console.log(user);
   }
@@ -56,7 +48,8 @@ function App() {
 
   const Logout = () => {
     console.log('Logout');
-    setUser({username: '', email: '', password: ''})
+    localStorage.removeItem('currentUser')
+    // setUser({username: '', email: '', password: ''})
     
   }
 
@@ -70,7 +63,7 @@ function App() {
           <button onClick={Logout}>Logout</button>
         </div>
       ) : (
-        <LoginForm Login={Login} error={error} />
+        <LoginForm user={user} Login={Login} error={error} />
       )}
       </Route>
       <Route path='/signup'>
