@@ -3,11 +3,17 @@ import NewMessage from './NewMessage'
 
 export default function Messages(props) {
     console.log(props.openRoom?.messages)
-    const messages = props.openRoom?.messages
+    let messages = props.openRoom?.messages
     // if (message.user === current_user)
-    // updateMessages(room){
-    //     messages
-    // }
+    const updateMessages = () => {
+        // messages.push(newMessage)
+        messages?.map(message => 
+            <div user={message.user}>
+                <span key={message.id} user={message.user}>{message.content}</span>
+                <h2>{message.user.username}</h2>
+             </div>   
+             )
+    }
     return (
         
         <div>
@@ -18,7 +24,7 @@ export default function Messages(props) {
              </div>   
              )
             }
-            { props.openRoom ?  <NewMessage setMessages={messages} openRoom={props.openRoom} setOpenRoom={props.setOpenRoom}/> : <h2>Click on a room to Chat</h2> }
+            { props.openRoom ?  <NewMessage className='new-message-bar' updateMessages={updateMessages} openRoom={props.openRoom} setOpenRoom={props.setOpenRoom}/> : <h2>Click on a room to Chat</h2> }
             
         </div>
     )

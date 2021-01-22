@@ -125,9 +125,14 @@ form .form-inner input[type='submit']:hover {
 
 }
 #chat-window {
-  
+  overflow: auto;
   border-radius: 0 10px 10px 0;
   display: flex;
   flex-grow: 1;
   height: 100%;
 }
+
+/* .new-message-form {
+  position: fixed;
+  
+} */

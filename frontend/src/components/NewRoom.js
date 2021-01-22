@@ -20,8 +20,7 @@ export default function NewRoom(props) {
         }
         fetch('http://localhost:3000/chat_rooms', reqObj)
         .then(res => res.json())
-        .then(room => console.log(room))
-        props.updateNewRooms(newRoom)
+        .then(room => props.updateNewRooms(room))
 
     }
 

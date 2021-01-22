@@ -77,7 +77,7 @@ function App() {
         <RegistrationForm SignUp={SignUp} />
       </Route>
       <Route path='/home'>
-        <Home />
+        <Home rooms={rooms} />
       </Route>
       </Router>
     </div>

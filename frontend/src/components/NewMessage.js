@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { render } from 'react-dom';
 import Messages from './Messages';
 
 
@@ -21,9 +22,10 @@ export default function NewMessage(props) {
         }
         fetch('http://localhost:3000/messages', reqObj)
         .then(res => res.json())
-        .then(message => console.log(message))
+        .then(message => props.updateMessages(message))
         props.setOpenRoom(props.openRoom)
-        props.setMessages([...props.messages, data ])
+      
+        
     }
 
     const handleChange = (e) => {

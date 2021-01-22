@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ChatRooms from './ChatRooms'
 import Messages from './Messages'
+import SearchRoom from './SearchRoom';
 
 
 export default function Home(props) {
@@ -29,6 +30,7 @@ export default function Home(props) {
                     {props.currentUser?.username}
                 </h2>
             </div>
+            <SearchRoom rooms={props.rooms} />
             <ChatRooms handleOpenRoom={handleOpenRoom} />
             </div>
             <div id="chat-window">
