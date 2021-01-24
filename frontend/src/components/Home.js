@@ -2,15 +2,22 @@ import React, { useState, useEffect } from 'react'
 import ChatRooms from './ChatRooms'
 import Messages from './Messages'
 import SearchRoom from './SearchRoom';
+import SubList from './SubList'
 
 
 export default function Home(props) {
+    const openRoomSubs = () => {
+        fetch('http://localhost:3000/sublist')
+        .then(res => res.json())
+        .then(sublist => console.log(sublist))
+    }
 
-    const [openRoom, setOpenRoom] = useState(null);
+    const [openRoom, setOpenRoom] = useState(localStorage.getItem('openRoom') || null);
 
     const handleOpenRoom = (room) => {
         if(room !== undefined){
             setOpenRoom(room)
+            localStorage.setItem('openRoom', room)
             setRoomMessages(room.messages)
         }
         // const [messages, setMessages] = useState({
@@ -44,8 +51,7 @@ export default function Home(props) {
             </div>
             <div id="chat-window">
             <Messages roomMessages={roomMessages} setOpenRoom={setOpenRoom} updateMessages={updateMessages} openRoom={openRoom} />
-            {/* { messages.map(message => <Message message={message} key={message.id} />)} */}
-            
+            <SubList openRoomSubs={openRoomSubs} />
             </div>
 
             

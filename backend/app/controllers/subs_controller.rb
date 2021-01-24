@@ -10,7 +10,11 @@ class SubsController < ApplicationController
 
   # GET /subs/1
   def show
-    render json: @sub
+    render json: @sub, include: [:user, :chat_room]
+  end
+  def sublist
+    @list = Sub.all.map { |sub| sub.chat_room = params[:chat_room]}
+    render json: @list, include: [:user, :chat_room]
   end
 
   # POST /subs
@@ -18,7 +22,7 @@ class SubsController < ApplicationController
     @sub = Sub.new(sub_params)
 
     if @sub.save
-      render json: @sub, status: :created, location: @sub
+      render json: @sub, status: :created, location: @sub, include: [:user, :chat_room]
     else
       render json: @sub.errors, status: :unprocessable_entity
     end
@@ -46,6 +50,6 @@ class SubsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def sub_params
-      params.fetch(:sub, {})
+      params.require(:sub).permit!
     end
 end
