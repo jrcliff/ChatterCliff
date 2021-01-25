@@ -6,7 +6,7 @@ import SubList from './SubList'
 
 
 export default function Home(props) {
-    const openRoomSubs = () => {
+    const openRoomSubs = (chat_room) => {
         fetch('http://localhost:3000/sublist')
         .then(res => res.json())
         .then(sublist => console.log(sublist))

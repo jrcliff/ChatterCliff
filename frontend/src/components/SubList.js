@@ -3,7 +3,7 @@ import React from 'react';
 const SubList = (props) => {
     return (
         <div>
-            <button onCLick={() => props.openRoomSubs(props.openRoom)}>
+            <button onCLick={(chat_room) => props.openRoomSubs(props.openRoom.id)}>
                 Members
             </button>
         </div>
