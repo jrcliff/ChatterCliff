@@ -3,6 +3,7 @@ import NewMessage from './NewMessage'
 import Subscribe from './Subscribe'
 
 
+
 export default function Messages(props) {
     
     return (
@@ -16,7 +17,7 @@ export default function Messages(props) {
              </div> 
              )
             }
-            { props.openRoom ?  <NewMessage className='new-message-bar' roomMessages={props.roomMessages} updateMessages={props.updateMessages} openRoom={props.openRoom} setOpenRoom={props.setOpenRoom}/> : <h2>Click on a room to Chat</h2> }
+            { props.openRoom ?  <NewMessage className='new-message-bar' roomMessages={props.roomMessages} updateMessages={props.updateMessages} openRoom={props.openRoom} user={props.user} setOpenRoom={props.setOpenRoom}/> : <h2>Click on a room to Chat</h2> }
             
         </div>
     )

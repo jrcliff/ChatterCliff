@@ -18,6 +18,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     if @message.save
+      
       render json: @message, include: [:chat_room, :user]
     else
       render json: @message.errors, status: :unprocessable_entity

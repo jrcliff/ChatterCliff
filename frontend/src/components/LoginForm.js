@@ -11,29 +11,34 @@ export default function LoginForm({ Login, error, props }) {
         username: '', 
         email: '', 
         password: '',
-        current_user: localStorage.getItem('current_user' || '')
         
     });
 
     const submitHandler = e => {
         e.preventDefault();
-        let username = details.username
+        let user = {
+            username: details.username,
+            email: details.email,
+            password: details.password
+
+        }
         let reqObj = {
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
-            body: JSON.stringify({ username })
+            body: JSON.stringify(user)
         };
         fetch('http://localhost:3000/login', reqObj)
         .then(res => res.json())
-        .then(user => localStorage.setItem('currentUser', user))
-        .then(user => () => props.Login(user))
-        
+        .then(user => Login(user))
+        .then(user => console.log(user))
+        // props.Login(user)
+        // console.log(details)
     }
 
     // console.log(props.currentUser)
     return (
         localStorage.getItem('current_user') ? <Redirect to='/home' /> :
-        <form onSubmit={submitHandler}>
+        <form onSubmit={(e) => submitHandler(e)}>
             <div className='form-inner'>
                 <h2>Login</h2>
                 {(error != "") ? ( <div className='error'>{error}</div> ) : ""}

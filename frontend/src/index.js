@@ -5,10 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App  />
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,900&display=swap');
 </style>

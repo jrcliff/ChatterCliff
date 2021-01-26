@@ -14,9 +14,9 @@ export default function NewMessage(props) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
               content: data,
-              user_id: 1,
+            //   user_id: sessionStorage.currentUser.id,
 
-            //   user_id: props.currentUser.id,
+              user_id: props.user.id,
               chat_room_id: props.openRoom.id
             })
         }
@@ -24,6 +24,7 @@ export default function NewMessage(props) {
         .then(res => res.json())
         .then(message => props.updateMessages(message))
         props.setOpenRoom(props.openRoom)
+        console.log(props.user);
       
         
     }

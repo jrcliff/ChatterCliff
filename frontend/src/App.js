@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import LoginForm from './components/LoginForm'
 import RegistrationForm from './components/RegistrationForm'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Home from './components/Home'
 
 
@@ -11,7 +11,9 @@ function App() {
     email: 'admin@admin.com',
     password: 'password'
   }
-
+  useState({
+    isLoggedIn: false
+  })
   const [rooms, setRooms] = useState([])
 
   useEffect(() => {
@@ -20,8 +22,9 @@ function App() {
       ).then(roomArr => localStorage.setItem('rooms', JSON.stringify(roomArr))
       )
   })
-
-  const [user, setUser] = useState(localStorage.getItem('currentUser') || {})
+  
+  
+  const [user, setUser] = useState(sessionStorage.getItem('currentUser') || {})
 
   useEffect(() => {
     
@@ -30,11 +33,15 @@ function App() {
   const [error, setError] = useState('');
 
   const Login = details => {
-    
-    setUser(details);
-  
+    let obj = {};
+    // setUser(details);
+    sessionStorage.setItem('currentUser', JSON.stringify(details))
+    // obj = JSON.parse(sessionStorage.currentUser);
+    // sessionStorage.setItem('currentUser', obj)
     console.log(details);
     console.log(user);
+    <Redirect to='/home' />
+    
   }
 
   const SignUp = details => {
@@ -55,9 +62,10 @@ function App() {
 
   return (
     <div className="App">
+    {/* {console.log(user)} */}
       <Router>
       <Route path='/login'>
-      {(user.email != '') ? (
+      {(user.email != null) ? (
         <div className='welcome'>
           <h2>Welcome, <span>{user.username}</span></h2>
           <button onClick={Logout}>Logout</button>
@@ -70,7 +78,7 @@ function App() {
         <RegistrationForm SignUp={SignUp} />
       </Route>
       <Route path='/home'>
-        <Home rooms={rooms} />
+        <Home user={user} rooms={rooms} />
       </Route>
       </Router>
     </div>

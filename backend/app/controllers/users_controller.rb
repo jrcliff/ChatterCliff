@@ -25,8 +25,13 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(username: params[:username])
-    render json: @user, include: [:chat_rooms => {:include => :messages}]
+    @current_user = User.find_by(username: params[:username])
+    if @current_user
+      session[:user_id] = @current_user.id
+      render json: @current_user, include: [:chat_rooms => {:include => :messages}]
+
+    end
+    # render json: @user, include: [:chat_rooms => {:include => :messages}]
   end
 
   # PATCH/PUT /users/1
@@ -51,6 +56,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :email)
+      params.require(:user).permit!
     end
 end

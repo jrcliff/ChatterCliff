@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import ChatRooms from './ChatRooms'
 import Messages from './Messages'
-import SearchRoom from './SearchRoom';
+// import SearchRoom from './SearchRoom';
 import SubList from './SubList'
+import actionCable from 'actioncable'
+
+
+const CableApp = {}
+CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
+
 
 
 export default function Home(props) {
@@ -28,6 +34,20 @@ export default function Home(props) {
     }
 
     const [roomMessages, setRoomMessages] = useState(openRoom?.messages)
+    let connection
+    useEffect(() => {
+      const cable = actionCable.createConsumer('ws://localhost:3000/cable') 
+      connection = cable.subscriptions.create(
+          { channel: 'ChatRoomsChannel', chat_room: openRoom},
+          {
+              connected: () => 
+              console.log('connected'),
+              received: (data) => {
+                  updateMessages(data);
+              }
+          }
+      )
+    })
     // if (message.user === current_user)
     const updateMessages = (newMessage) => {
         setRoomMessages([...roomMessages, newMessage])
@@ -43,14 +63,14 @@ export default function Home(props) {
             <div>
                 
                 <h2>
-                    {props.currentUser?.username}
+                    {props.user.username}
                 </h2>
             </div>
-            <SearchRoom rooms={props.rooms} />
+            {/* <SearchRoom rooms={props.rooms} /> */}
             <ChatRooms handleOpenRoom={handleOpenRoom} />
             </div>
             <div id="chat-window">
-            <Messages roomMessages={roomMessages} setOpenRoom={setOpenRoom} updateMessages={updateMessages} openRoom={openRoom} />
+            <Messages user={props.user} cableApp={CableApp} roomMessages={roomMessages} setOpenRoom={setOpenRoom} updateMessages={updateMessages}  openRoom={openRoom} />
             <SubList openRoomSubs={openRoomSubs} />
             </div>
 
