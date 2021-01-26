@@ -24,7 +24,9 @@ function App() {
   })
   
   
-  const [user, setUser] = useState(sessionStorage.getItem('currentUser') || {})
+  const [user, setUser] = useState(
+    JSON.parse(sessionStorage.getItem('currentUser')) || {}
+    )
 
   useEffect(() => {
     
