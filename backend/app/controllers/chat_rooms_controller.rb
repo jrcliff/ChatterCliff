@@ -18,7 +18,13 @@ class ChatRoomsController < ApplicationController
     @chat_room = ChatRoom.new(chat_room_params)
 
     if @chat_room.save
-      render json: @chat_room, status: :created, location: @chat_room
+      # serialized_data = ActiveModelSerializers::Adapter::Json.new(
+      #   ChatRoomSerializer.new(conversation)
+      # ).serializable_hash
+      # ActionCable.server.broadcast 'chat_rooms_channel', serialized_data
+      # head :ok
+
+      render json: @chat_room, include: [:user, :users, :messages]
     else
       render json: @chat_room.errors, status: :unprocessable_entity
     end

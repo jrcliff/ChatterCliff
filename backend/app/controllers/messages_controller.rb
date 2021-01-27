@@ -10,18 +10,21 @@ class MessagesController < ApplicationController
 
   # GET /messages/1
   def show
-    render json: @message
+    render json: @message, include: [:user, :chat_room => {:include => :subs}]
   end
 
   # POST /messages
   def create
     @message = Message.new(message_params)
-
+    chat_room = ChatRoom.find(message_params['chat_room_id'])
     if @message.save
+      ChatRoomsChannel.broadcast_to(chat_room, {
+        chat_room: ChatRoomSerializer.new(chat_room),
+        users: UserSerializer.new(chat_room.users),
+        messages: MessageSerializer.new(chat_room.messages)
+      })
       
-      render json: @message, include: [:chat_room, :user]
-    else
-      render json: @message.errors, status: :unprocessable_entity
+      render json: @message, include: [:user, :chat_room => {:include => :users}]
     end
   end
 

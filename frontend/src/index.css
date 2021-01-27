@@ -130,8 +130,14 @@ form .form-inner input[type='submit']:hover {
   display: flex;
   flex-grow: 1;
   height: 100%;
+  width: 100%
 }
 
+.current-user-message {
+  text-align: right;
+  margin-right: 2.5%;
+  margin-left: 45%;
+}
 /* .new-message-form {
   position: fixed;
   

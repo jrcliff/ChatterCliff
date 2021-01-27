@@ -3,6 +3,7 @@ import LoginForm from './components/LoginForm'
 import RegistrationForm from './components/RegistrationForm'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Home from './components/Home'
+import ActionCableProvider from 'react-actioncable-provider'
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
   }
 
   return (
+    <ActionCableProvider url='/cable'>
     <div className="App">
     {/* {console.log(user)} */}
       <Router>
@@ -84,6 +86,7 @@ function App() {
       </Route>
       </Router>
     </div>
+    </ActionCableProvider>
   );
 }
 

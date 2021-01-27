@@ -14,10 +14,8 @@ export default function NewMessage(props) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
               content: data,
-            //   user_id: sessionStorage.currentUser.id,
-
               user_id: props.user.id,
-              chat_room_id: props.openRoom.id
+              chat_room_id: props.openRoom?.id
             })
         }
         fetch('http://localhost:3000/messages', reqObj)

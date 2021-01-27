@@ -22,7 +22,7 @@ class SubsController < ApplicationController
     @sub = Sub.new(sub_params)
 
     if @sub.save
-      render json: @sub, status: :created, location: @sub, include: [:user, :chat_room]
+      render json: @sub, include: [:user, :chat_room]
     else
       render json: @sub.errors, status: :unprocessable_entity
     end
