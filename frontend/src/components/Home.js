@@ -4,9 +4,11 @@ import Messages from './Messages'
 // import SearchRoom from './SearchRoom';
 import SubList from './SubList'
 import actionCable from 'actioncable'
+import { makeStyles } from '@material-ui/core/styles';
 import { ActionCable } from 'react-actioncable-provider';
 import { API_ROOT } from '../constants';
-
+import { Button } from '@material-ui/core'
+import LoginForm from './LoginForm'
 
 const CableApp = {}
 CableApp.cable = actionCable.createConsumer('ws://localhost:3000/cable')
@@ -58,7 +60,7 @@ export default function Home(props) {
         setRoomMessages([...roomMessages, newMessage])
          console.log(roomMessages);
     }
-
+   
     console.log(openRoom);
     const [currentRoom, setCurrentRoom] = useState({})
     const getRoomData = (id) => {
@@ -83,18 +85,25 @@ export default function Home(props) {
         })
     }
     return (
+        props.user ? (
         <div id='chat-container'>
             <div id="side-bar">
+            <div id='profile-pic'>
+                <img src='https://i.imgur.com/mKHkbb4.jpg'/>
+            </div>
             <div>
                 
                 <h2>
-                    {props.user.username}
+                    {props.user?.username} <Button onClick={() => props.logout()}>Logout</Button>
                 </h2>
             </div>
             {/* <SearchRoom rooms={props.rooms} /> */}
             <ChatRooms handleOpenRoom={handleOpenRoom} />
             </div>
             <div id="chat-window">
+            <div className='title-bar'>
+                {openRoom?.title}
+            </div>
             <Messages 
                 user={props.user} 
                 updateApp={updateAppStateRoom}
@@ -110,6 +119,6 @@ export default function Home(props) {
             </div>
 
             
-        </div>
+        </div>) : (<LoginForm Login={props.login} />)
     )
 }

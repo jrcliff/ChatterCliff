@@ -1,6 +1,5 @@
 development:
-  adapter: redis
-  url: "redis://localhost:3000/cable"
+  adapter: async
 
 test:
   adapter: test

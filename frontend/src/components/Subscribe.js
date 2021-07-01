@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 
 const Subscribe = (props) => {
@@ -15,13 +16,14 @@ console.log(props);
         fetch('http://localhost:3000/subs', reqObj )
         .then(res => res.json())
         .then(sub => console.log(sub))
-
+        let button = document.getElementById('subscribe-button')
+        button.innerText = 'Subscribed'
     }
     return (
-        <div>
-            <button onClick={() => handleSubscribe()}>
+        <div className='subscribe-button'>
+            <Button id='subscribe-button' onClick={() => handleSubscribe()}>
                 Subscribe
-            </button>   
+            </Button>   
         </div>
         
     );

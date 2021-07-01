@@ -12,7 +12,7 @@ export default function Messages(props) {
     const [channel, setChannel] = useState(null)
     useEffect(() => {
         console.log(props.roomMessages);
-    })
+    }, [])
     const whichUser = (message) => {
         if (message.user_id === props.user.id) {
             return 'current-user-message'
@@ -23,15 +23,16 @@ export default function Messages(props) {
     
 
     return (
-        <ActionCableConsumer>
-        <div>
+        // <ActionCableConsumer>
+        
+        <ul className='messages'>
              <Subscribe openRoom={props.openRoom} />  
             {props.roomMessages?.map(message =>
             
-            <span className={whichUser(message)} user={message.user}>
+            <li className={whichUser(message)} user={message.user}>
                 <div key={message.id} user={message.user}>{message.content}</div>
                 <h4>{message.user?.username}</h4>
-             </span> 
+             </li> 
             
            
             )
@@ -43,7 +44,7 @@ export default function Messages(props) {
             /> */}
             { props.openRoom ?  <NewMessage className='new-message-bar' roomMessages={props.roomMessages} updateMessages={props.updateMessages} openRoom={props.openRoom} user={props.user} setOpenRoom={props.setOpenRoom}/> : <h2>Click on a room to Chat</h2> }
             
-        </div>
-        </ActionCableConsumer>
+        </ul>
+        // </ActionCableConsumer>
     )
 }

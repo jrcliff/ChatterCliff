@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useHistory, useEffect} from 'react'
 import LoginForm from './components/LoginForm'
 import RegistrationForm from './components/RegistrationForm'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
@@ -26,7 +26,7 @@ function App() {
   
   
   const [user, setUser] = useState(
-    JSON.parse(sessionStorage.getItem('currentUser')) || {}
+    JSON.parse(sessionStorage.getItem('currentUser')) || null
     )
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function App() {
   })
 
   const [error, setError] = useState('');
-
+  const [isLoggedIn, setLogin] = useState(false)
   const Login = details => {
     let obj = {};
     // setUser(details);
@@ -43,7 +43,11 @@ function App() {
     // sessionStorage.setItem('currentUser', obj)
     console.log(details);
     console.log(user);
-    <Redirect to='/home' />
+    // history.push('/home')
+    setLogin(!isLoggedIn)
+    window.location.reload()
+    
+    // return <Home />
     
   }
 
@@ -58,35 +62,34 @@ function App() {
 
   const Logout = () => {
     console.log('Logout');
-    localStorage.removeItem('currentUser')
+    // localStorage.removeItem('currentUser')
+    sessionStorage.clear()
     // setUser({username: '', email: '', password: ''})
-    
+    window.location.reload()
   }
 
   return (
-    <ActionCableProvider url='/cable'>
+    
+    // <ActionCableProvider url='/cable'>
     <div className="App">
     {/* {console.log(user)} */}
       <Router>
-      <Route path='/login'>
-      {(user.email != null) ? (
-        <div className='welcome'>
-          <h2>Welcome, <span>{user.username}</span></h2>
-          <button onClick={Logout}>Logout</button>
-        </div>
+      <Route exact  path='/' render={() => <Home />} >
+      {(user != null) ? (
+        <Home user={user} login={Login} logout={Logout} rooms={rooms} />
       ) : (
         <LoginForm user={user} Login={Login} error={error} />
       )}
       </Route>
-      <Route path='/signup'>
+      <Route exact path='/signup'>
         <RegistrationForm SignUp={SignUp} />
       </Route>
       <Route path='/home'>
-        <Home user={user} rooms={rooms} />
+        <Home user={user}  login={Login} logout={Logout} rooms={rooms} />
       </Route>
       </Router>
     </div>
-    </ActionCableProvider>
+    // </ActionCableProvider>
   );
 }
 

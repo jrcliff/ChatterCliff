@@ -9,17 +9,17 @@ class ChatRoomsChannel < ApplicationCable::Channel
     end
   end
   
-  def speak(data)
-    user = User.find_by(id: params[:user_id])
-    chat_room   = @chat_room
-    message   = data['message']
+  # def speak(data)
+  #   user = User.find_by(id: params[:user_id])
+  #   chat_room   = @chat_room
+  #   message   = data['message']
 
-    Message.create!(
-      chat_room: chat_room ,
-      user: user,
-      content: message
-    )
-  end
+  #   Message.create!(
+  #     chat_room: chat_room ,
+  #     user: user,
+  #     content: message
+  #   )
+  # end
 
   # def received(data) 
     

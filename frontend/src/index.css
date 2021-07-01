@@ -137,8 +137,82 @@ form .form-inner input[type='submit']:hover {
   text-align: right;
   margin-right: 2.5%;
   margin-left: 45%;
+  display: block
 }
+
+
+
 /* .new-message-form {
+  
   position: fixed;
+  bottom: 0;
+  width: 100%;
+  
   
 } */
+#new-message {
+  /* background: #003554;
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25); */
+  width: 70%;
+  opacity: 0.8;
+  bottom: 0;
+  /* background-color: #3590F3; */
+  position: fixed;
+  padding-right: 30px;
+}
+#new-message-button {
+  /* background: #003554;
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25); */
+  width: 10%;
+  opacity: 0.8;
+  bottom: 0;
+  left: 90%;
+  background-color: #3590F3;
+  position: fixed;
+  
+}
+
+.title-bar {
+  top: 0%;
+  position: fixed;
+  text-align: center;
+  width: 80%;
+  display: absolute
+}
+
+.subscribe-button {
+  text-align:right;
+}
+
+.messages {
+  position: relative;
+  
+  padding: none;
+  width: 100%;
+  grid-area: messages;
+  display: flex;
+  flex-direction: column;
+  
+  overflow-y: scroll;
+}
+
+ul {
+  list-style-type: none
+}
+
+html {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to right, $sky-blue 0%,$sky-dark-blue 100%);
+}
+
+img {
+  margin-top: 20%;
+  margin-left: 17%;
+  border-radius: 50%;
+  max-width: 60%;
+  max-height: 100%;
+  
+  text-align: center;
+}
+

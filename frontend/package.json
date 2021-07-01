@@ -10,6 +10,7 @@
     "actioncable": "^5.2.4-4",
     "actioncable-js": "^5.0.0-rc2",
     "axios": "^0.21.1",
+    "graphql": "^15.5.1",
     "react": "^17.0.1",
     "react-actioncable-provider": "^2.0.0",
     "react-dom": "^17.0.1",

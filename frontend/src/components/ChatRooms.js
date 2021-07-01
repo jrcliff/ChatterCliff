@@ -19,6 +19,7 @@ export default function ChatRooms(props) {
         let updatedRooms = rooms.filter(room => room !== e)
         fetch(`http://localhost:3000/chat_rooms/${e.id}`, {method: 'DELETE'})
         setRooms(updatedRooms)
+        
     }
     const updateNewRooms = (room) => {
         setRooms([...rooms, room])

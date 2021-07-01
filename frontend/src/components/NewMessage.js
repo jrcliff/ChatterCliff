@@ -1,3 +1,4 @@
+import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react'
 import { render } from 'react-dom';
 import Messages from './Messages';
@@ -23,6 +24,7 @@ export default function NewMessage(props) {
         .then(message => props.updateMessages(message))
         props.setOpenRoom(props.openRoom)
         console.log(props.user);
+        
       
         
     }
@@ -35,9 +37,9 @@ export default function NewMessage(props) {
 
     return (
         <div className='new-message-form'>
-            <form onSubmit={handleSendMessage } className='new-message'>
-                <input type='text' onChange={(e) => handleChange(e)} name='new-message'  id='new-message' placeholder='New Message' value={newMessage} ></input>
-                <input type='submit' placeholder='send'></input>
+            <form className='new-message-form' onSubmit={handleSendMessage } className='new-message'>
+                <TextField type='text' onChange={(e) => handleChange(e)} name='new-message'  id='new-message' placeholder='New Message' value={newMessage} ></TextField>
+                <Button type='submit' placeholder='send' id='new-message-button'>Send</Button>
             </form>
         </div>
     )
